@@ -33,12 +33,12 @@ class CoursesContainer extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    let fromSearch = [];
-    this.state.courses.forEach((course) => {
-      if (course.title.toLowerCase().includes(this.state.search.toLowerCase()))
-        fromSearch.push(course);
+    let results = this.state.courses.filter((course) => {
+      return course.title
+        .toLowerCase()
+        .includes(this.state.search.toLowerCase());
     });
-    this.setState({ results: fromSearch });
+    this.setState({ results: results });
   };
   render() {
     return (
