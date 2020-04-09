@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button } from "semantic-ui-react";
+import ResultList from "./ResultList";
 
 class CoursesContainer extends Component {
   constructor() {
@@ -8,6 +9,7 @@ class CoursesContainer extends Component {
       courses: [],
       isLoading: true,
       search: "",
+      results: [],
     };
   }
 
@@ -20,6 +22,7 @@ class CoursesContainer extends Component {
         this.setState({
           courses: response,
           isLoading: false,
+          results: response,
         });
       });
   }
@@ -30,6 +33,12 @@ class CoursesContainer extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    let fromSearch = [];
+    this.state.courses.forEach((course) => {
+      if (course.title.toLowerCase().includes(this.state.search.toLowerCase()))
+        fromSearch.push(course);
+    });
+    this.setState({ results: fromSearch });
   };
   render() {
     return (
@@ -50,8 +59,8 @@ class CoursesContainer extends Component {
           </Form>
         </div>
         <ul>
-          {this.state.courses.map((course, index) => (
-            <li key={index}>{course.title} - More Details</li>
+          {this.state.results.map((course, index) => (
+            <ResultList key={index} course={course} />
           ))}
         </ul>
       </div>
