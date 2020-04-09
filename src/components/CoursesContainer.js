@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Form, Button } from "semantic-ui-react";
 
 class CoursesContainer extends Component {
   constructor() {
@@ -6,6 +7,7 @@ class CoursesContainer extends Component {
     this.state = {
       courses: [],
       isLoading: true,
+      search: "",
     };
   }
 
@@ -21,8 +23,39 @@ class CoursesContainer extends Component {
         });
       });
   }
+
+  handleChange = (event) => {
+    this.setState({ search: event.target.value });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+  };
   render() {
-    return <div>courses container</div>;
+    return (
+      <div>
+        <h1>Courses</h1>
+        <div>
+          Search by Title:
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Field>
+              <input
+                type='text'
+                placeholder='Search courses'
+                value={this.state.search}
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+            <Button type='submit'>Search</Button>
+          </Form>
+        </div>
+        <ul>
+          {this.state.courses.map((course, index) => (
+            <li key={index}>{course.title} - More Details</li>
+          ))}
+        </ul>
+      </div>
+    );
   }
 }
 
