@@ -60,11 +60,8 @@ class CoursesContainer extends Component {
             <Button type='submit'>Search</Button>
           </Form>
         </div>
-        <ul>
-          {this.state.results.map((course, index) => (
-            <ResultList key={index} course={course} />
-          ))}
-        </ul>
+
+        <ResultList courses={this.state.results} />
       </div>
     );
   }
