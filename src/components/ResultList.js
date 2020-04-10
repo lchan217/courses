@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 import ShowCourse from "./ShowCourse";
 
@@ -19,7 +19,14 @@ class ResultList extends Component {
   render() {
     let data;
     if (this.state.showCourse) {
-      data = <ShowCourse course={this.state.course} />;
+      data = (
+        <Redirect
+          to={{
+            pathname: `${this.state.course.courseId}`,
+            state: { course: this.state.course }
+          }}
+        />
+      );
     } else {
       data = this.props.courses.map(course => {
         return (
