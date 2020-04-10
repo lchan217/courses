@@ -1,39 +1,30 @@
 import React, { Component } from "react";
 import { Form, Button } from "semantic-ui-react";
 import ResultList from "./ResultList";
+import { connect } from "react-redux";
+import { fetchCourse } from "../../src/actions/CourseActions";
 
 class CoursesContainer extends Component {
   constructor() {
     super();
     this.state = {
-      courses: [],
       isLoading: true,
       search: "",
-      results: [],
+      results: []
     };
   }
 
   componentDidMount() {
-    fetch(
-      "https://cors-anywhere.herokuapp.com/https://quze-intern-test.s3.us-east-2.amazonaws.com/course-data.json"
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        this.setState({
-          courses: response,
-          isLoading: false,
-          results: response,
-        });
-      });
+    this.props.fetchCourse();
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({ search: event.target.value });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-    let results = this.state.courses.filter((course) => {
+    let results = this.state.courses.filter(course => {
       return course.title
         .toLowerCase()
         .includes(this.state.search.toLowerCase());
@@ -58,14 +49,21 @@ class CoursesContainer extends Component {
             <Button type='submit'>Search</Button>
           </Form>
         </div>
-        <ul>
-          {this.state.results.map((course, index) => (
-            <ResultList key={index} course={course} />
-          ))}
-        </ul>
+        <ResultList />
       </div>
     );
   }
 }
 
-export default CoursesContainer;
+const mapStateToProps = state => {
+  return {
+    courses: state
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchCourse: () => dispatch(fetchCourse())
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesContainer);
