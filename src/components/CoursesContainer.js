@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button } from "semantic-ui-react";
 import ResultList from "./ResultList";
-import { connect } from "react-redux";
-import { fetchCourse } from "../../src/actions/CourseActions";
 
 class CoursesContainer extends Component {
   constructor() {
@@ -60,25 +58,11 @@ class CoursesContainer extends Component {
             <Button type='submit'>Search</Button>
           </Form>
         </div>
-        <ul>
-          {this.state.results.map((course, index) => (
-            <ResultList key={index} course={course} />
-          ))}
-        </ul>
+
+        <ResultList courses={this.state.results} />
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    courses: state
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchCourse: () => dispatch(fetchCourse())
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(CoursesContainer);
+export default CoursesContainer;
