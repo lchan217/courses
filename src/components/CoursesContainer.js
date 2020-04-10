@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button } from "semantic-ui-react";
 import ResultList from "./ResultList";
-import { connect } from "react-redux";
-import { fetchCourse } from "../../src/actions/CourseActions";
 
 class CoursesContainer extends Component {
   constructor() {
@@ -67,15 +65,4 @@ class CoursesContainer extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    courses: state
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchCourse: () => dispatch(fetchCourse())
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(CoursesContainer);
+export default CoursesContainer;
