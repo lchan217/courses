@@ -8,6 +8,7 @@ class CoursesContainer extends Component {
   constructor() {
     super();
     this.state = {
+      courses: [],
       isLoading: true,
       search: "",
       results: []
@@ -15,7 +16,17 @@ class CoursesContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchCourse();
+    fetch(
+      "https://cors-anywhere.herokuapp.com/https://quze-intern-test.s3.us-east-2.amazonaws.com/course-data.json"
+    )
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          courses: response,
+          isLoading: false,
+          results: response
+        });
+      });
   }
 
   handleChange = event => {
@@ -49,7 +60,11 @@ class CoursesContainer extends Component {
             <Button type='submit'>Search</Button>
           </Form>
         </div>
-        <ResultList />
+        <ul>
+          {this.state.results.map((course, index) => (
+            <ResultList key={index} course={course} />
+          ))}
+        </ul>
       </div>
     );
   }
