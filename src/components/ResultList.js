@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Button } from "semantic-ui-react";
-import ShowCourse from "./ShowCourse";
 
 class ResultList extends Component {
   constructor() {
