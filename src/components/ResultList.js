@@ -38,9 +38,22 @@ class ResultList extends Component {
                 {course.shortDescription.slice(0, 300)}
               </Card.Description>
               <br />
-              <Button onClick={() => this.handleOnClick(course)}>
+              <Button primary onClick={() => this.handleOnClick(course)}>
                 More Detail
               </Button>
+            </Card.Content>
+            <Card.Content extra>
+              {course.quzeTags &&
+                course.quzeTags
+                  .split(",")
+
+                  .map(tag => {
+                    return (
+                      <Button size='tiny' basic color='grey'>
+                        {tag}
+                      </Button>
+                    );
+                  })}
             </Card.Content>
           </Card>
         );
