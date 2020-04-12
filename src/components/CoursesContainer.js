@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Container } from "semantic-ui-react";
 import ResultList from "./ResultList";
-import { Container } from "semantic-ui-react";
 
 class CoursesContainer extends Component {
   constructor() {
