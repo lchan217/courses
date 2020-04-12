@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { Button } from "semantic-ui-react";
+import { Button, Card, Image } from "semantic-ui-react";
 
 class ResultList extends Component {
   constructor() {
@@ -29,17 +29,30 @@ class ResultList extends Component {
     } else {
       data = this.props.courses.map(course => {
         return (
-          <li>
-            {course.title} -{" "}
-            <Button onClick={() => this.handleOnClick(course)}>
-              More Detail
-            </Button>
-          </li>
+          <Card>
+            <Image src={course.imgUrl} />
+            <Card.Content>
+              <Card.Header>{course.title}</Card.Header>
+              <Card.Meta>Author: {course.author}</Card.Meta>
+              <Card.Description>
+                {course.shortDescription.slice(0, 300)}
+              </Card.Description>
+              <br />
+              <Button onClick={() => this.handleOnClick(course)}>
+                More Detail
+              </Button>
+            </Card.Content>
+          </Card>
         );
       });
     }
 
-    return <div>{data}</div>;
+    return (
+      <div>
+        {" "}
+        <Card.Group itemsPerRow={3}>{data}</Card.Group>
+      </div>
+    );
   }
 }
 

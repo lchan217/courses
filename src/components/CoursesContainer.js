@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button } from "semantic-ui-react";
 import ResultList from "./ResultList";
+import { Container } from "semantic-ui-react";
 
 class CoursesContainer extends Component {
   constructor() {
@@ -18,6 +19,7 @@ class CoursesContainer extends Component {
       "https://cors-anywhere.herokuapp.com/https://quze-intern-test.s3.us-east-2.amazonaws.com/course-data.json"
     )
       .then(response => response.json())
+
       .then(response => {
         this.setState({
           courses: response,
@@ -42,7 +44,7 @@ class CoursesContainer extends Component {
   };
   render() {
     return (
-      <div>
+      <Container>
         <h1>Courses</h1>
         <div>
           Search by Title:
@@ -60,7 +62,7 @@ class CoursesContainer extends Component {
         </div>
 
         <ResultList courses={this.state.results} />
-      </div>
+      </Container>
     );
   }
 }
