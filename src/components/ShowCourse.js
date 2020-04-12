@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Container, Button, Icon, Image } from "semantic-ui-react";
-import { Redirect } from "react-router-dom";
 
 class ShowCourse extends Component {
   previousPage = () => {
@@ -21,7 +20,7 @@ class ShowCourse extends Component {
     return (
       <Container>
         <Button floated='right' onClick={this.previousPage}>
-          Back
+          Home
         </Button>
         <h1>{title}</h1>
         <h3>By: {author}</h3>
