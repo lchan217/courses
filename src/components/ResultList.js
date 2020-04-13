@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { Button, Card, Image } from "semantic-ui-react";
+import "../css/ResultList.css";
 
 class ResultList extends Component {
   constructor() {
@@ -33,7 +34,7 @@ class ResultList extends Component {
     } else {
       data = this.props.courses.map(course => {
         return (
-          <Card>
+          <Card className='course-card'>
             <Image src={course.imgUrl} />
             <Card.Content>
               <Card.Header>{course.title}</Card.Header>
@@ -58,6 +59,7 @@ class ResultList extends Component {
                         basic
                         color='grey'
                         onClick={() => this.handleOnTag(tag)}
+                        className='tag-button'
                       >
                         {tag}
                       </Button>
@@ -72,7 +74,7 @@ class ResultList extends Component {
     return (
       <div>
         {" "}
-        <Card.Group itemsPerRow={3}>{data}</Card.Group>
+        <Card.Group>{data}</Card.Group>
       </div>
     );
   }
