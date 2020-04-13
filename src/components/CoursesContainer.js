@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Form, Button, Container } from "semantic-ui-react";
+import {
+  Form,
+  Button,
+  Container,
+  Segment,
+  Dimmer,
+  Loader
+} from "semantic-ui-react";
 import ResultList from "./ResultList";
 
 class CoursesContainer extends Component {
@@ -60,31 +67,45 @@ class CoursesContainer extends Component {
     this.setState({ results: results });
   };
   render() {
-    return (
-      <Container>
-        <h1>Courses</h1>
-        <div>
-          Search by Title:
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Field>
-              <input
-                type='text'
-                placeholder='Search courses'
-                value={this.state.search}
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Button type='submit'>Search</Button>
-            <Button onClick={this.clearFilter} type='submit'>
-              Clear
-            </Button>
-          </Form>
-          <i>Click on tags to see similar topics</i>
-        </div>
+    let data;
+    if (this.state.isLoading) {
+      data = (
+        <Dimmer active inverted>
+          <Loader inline='centered'>Loading</Loader>
+        </Dimmer>
+      );
+    } else {
+      data = (
+        <Container>
+          <h1>Courses</h1>
+          <div>
+            Search by Title:
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Field>
+                <input
+                  type='text'
+                  placeholder='Search courses'
+                  value={this.state.search}
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Button type='submit'>Search</Button>
+              <Button onClick={this.clearFilter} type='submit'>
+                Clear
+              </Button>
+            </Form>
+            <i>Click on tags to see similar topics</i>
+          </div>
 
-        <ResultList courses={this.state.results} receiveTag={this.receiveTag} />
-      </Container>
-    );
+          <ResultList
+            courses={this.state.results}
+            receiveTag={this.receiveTag}
+          />
+        </Container>
+      );
+    }
+
+    return <div>{data}</div>;
   }
 }
 
