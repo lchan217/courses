@@ -14,7 +14,8 @@ class ShowCourse extends Component {
       durationPeriod,
       imgUrl,
       level,
-      url
+      url,
+      programType
     } = this.props.location.state.course;
 
     return (
@@ -25,17 +26,23 @@ class ShowCourse extends Component {
         <h1>{title}</h1>
         <h3>By: {author}</h3>
         <Image src={imgUrl} size='medium' />
+        <br />
         <div>
           {shortDescription}{" "}
           <a href={url}>
             {" "}
-            <Icon name='angle double right'></Icon>
+            Learn More<Icon name='angle double right'></Icon>
           </a>
         </div>
         <div>
-          Time: {duration} {durationPeriod}
+          <b>Time:</b> {duration} {durationPeriod}
         </div>
-        <div>Level: {level}</div>
+        <div>
+          <b>Level:</b> {level}
+        </div>
+        <div>
+          <b>Program Type:</b> {programType}
+        </div>
       </Container>
     );
   }

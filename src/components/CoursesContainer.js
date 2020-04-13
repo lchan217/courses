@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  Form,
-  Button,
-  Container,
-  Segment,
-  Dimmer,
-  Loader
-} from "semantic-ui-react";
+import { Form, Button, Container, Dimmer, Loader } from "semantic-ui-react";
 import ResultList from "./ResultList";
 
 class CoursesContainer extends Component {
@@ -89,14 +82,16 @@ class CoursesContainer extends Component {
                   onChange={this.handleChange}
                 />
               </Form.Field>
+              <i>Click on tags to see similar topics</i>
+              <br />
+              <br />
               <Button type='submit'>Search</Button>
-              <Button onClick={this.clearFilter} type='submit'>
+              <Button onClick={this.clearFilter} type='submit' floated='right'>
                 Clear
               </Button>
             </Form>
-            <i>Click on tags to see similar topics</i>
           </div>
-
+          <br />
           <ResultList
             courses={this.state.results}
             receiveTag={this.receiveTag}
