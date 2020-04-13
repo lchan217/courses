@@ -15,6 +15,10 @@ class ResultList extends Component {
     this.setState({ showCourse: true, course: course });
   };
 
+  handleOnTag = tag => {
+    this.props.receiveTag(tag);
+  };
+
   render() {
     let data;
     if (this.state.showCourse) {
@@ -49,7 +53,12 @@ class ResultList extends Component {
 
                   .map(tag => {
                     return (
-                      <Button size='tiny' basic color='grey'>
+                      <Button
+                        size='tiny'
+                        basic
+                        color='grey'
+                        onClick={() => this.handleOnTag(tag)}
+                      >
                         {tag}
                       </Button>
                     );

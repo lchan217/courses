@@ -41,6 +41,24 @@ class CoursesContainer extends Component {
     });
     this.setState({ results: results });
   };
+
+  clearFilter = () => {
+    this.setState({ results: this.state.courses });
+  };
+
+  receiveTag = tag => {
+    let results = [];
+    this.state.courses.map(course => {
+      return (
+        course.quzeTags &&
+        course.quzeTags.split(",").filter(quzeTag => {
+          if (quzeTag === tag) return results.push(course);
+        })
+      );
+    });
+
+    this.setState({ results: results });
+  };
   render() {
     return (
       <Container>
@@ -57,10 +75,14 @@ class CoursesContainer extends Component {
               />
             </Form.Field>
             <Button type='submit'>Search</Button>
+            <Button onClick={this.clearFilter} type='submit'>
+              Clear
+            </Button>
           </Form>
+          <i>Click on tags to see similar topics</i>
         </div>
 
-        <ResultList courses={this.state.results} />
+        <ResultList courses={this.state.results} receiveTag={this.receiveTag} />
       </Container>
     );
   }
